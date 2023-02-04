@@ -1,0 +1,89 @@
+﻿<Window x:Class="ChatAppServerSide.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatAppServerSide"
+        mc:Ignorable="d"
+        Title="Server" 
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/server.png"
+        Height="450" 
+        Width="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2.3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Gray"
+                    BorderThickness="0,0,2,0">
+                <StackPanel>
+                    <TextBlock Text="Persons"
+                               Style="{StaticResource TextTitle}"
+                               Margin="25 15 0 5" />
+
+                    <ListView ItemsSource="{Binding Clients, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemContainerStyle="{StaticResource LvItemStyle}">
+                        <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedCarChangedCommand}" ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderBrush}">
+                                    <ItemsPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
+
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          Name="ScrollViewer">
+                <StackPanel>
+                    <TextBlock Text="Messages"
+                               Foreground="SpringGreen"
+                               Style="{StaticResource TextTitle}"
+                               Margin="25 15 0 5" />
+
+                    <ListView ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ItemContainerStyle="{StaticResource LvItemStyle}">
+                        <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedCarChangedCommand}" ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderBrush}">
+                                    <ItemsPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
+
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
